@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -18,6 +19,12 @@ public class Student {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private int id;
     private double[] grades;
+    private String phone;
+    private String gender;
+    private LocalDate dateOfBirth;
+    private String school;
+    private String major;
+    private String email;
     private String firstName;
     private String lastName;
     private String password;
