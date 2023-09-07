@@ -1,11 +1,12 @@
 import React from "react";
 import Image from "next/image";
 
-import profileIcon from "@/app/assets/ProfilePic.png";
-import studentsIcon from "@/app/assets/icons8-students-16.png";
-import coursesIcon from "@/app/assets/icons8-book-96.png";
-import teachersIcon from "@/app/assets/icons8-teacher-16.png";
-import settingsIcon from "@/app/assets/icons8-settings-16.png";
+import profileIcon from "@/app/assets/profile.png";
+import studentsIcon from "@/app/assets/student.png";
+import coursesIcon from "@/app/assets/book.png";
+import teacherIcon from "@/app/assets/teacher.png";
+import settingsIcon from "@/app/assets/settings.png";
+import logoutIcon from "@/app/assets/logout.png";
 
 const Sidebar = () => {
   return (
@@ -18,14 +19,14 @@ const Sidebar = () => {
           className="rounded-full h-14 w-14"
         />
         <div className="ml-3">
-          <p className="text-lg font-normal text-slate-200">Matthew E.</p>
+          <p className="text-lg font-normal text-slate-200">Username</p>
           <p className="text-sm font-semibold text-gray-400">Administrator</p>
         </div>
       </div>
 
       <nav className="p-4">
         <ul>
-          <li className="mb-2">
+          <li className="mb-6">
             <a
               href="#"
               className="flex items-center text-gray-300 hover:text-white transition-colors duration-200"
@@ -33,13 +34,13 @@ const Sidebar = () => {
               <Image
                 src={studentsIcon}
                 alt="Students Icon"
-                className="h-6 w-6"
+                className="h-8 w-8"
               />
               <span className="ml-3">Students</span>
             </a>
           </li>
 
-          <li className="mb-2">
+          <li className="mb-6">
             <a
               href="#"
               className="flex items-center text-gray-300 hover:text-white transition-colors duration-200"
@@ -48,27 +49,39 @@ const Sidebar = () => {
                 <Image
                   src={coursesIcon}
                   alt="Courses Icon"
-                  className="h-10 w-10"
+                  className="h-8 w-8"
                 />
               </span>
               Courses
             </a>
           </li>
-          <li className="mb-2">
+          <li className="mb-6">
             <a
               href="#"
               className="flex items-center text-gray-300 hover:text-white transition-colors duration-200"
             >
-              <span className="material-icons mr-2">groups</span>
+              <span className="material-icons mr-2">
+                <Image
+                  src={teacherIcon}
+                  alt="Courses Icon"
+                  className="h-8 w-8"
+                />
+              </span>
               Teachers
             </a>
           </li>
-          <li className="mb-2">
+          <li className="mb-6">
             <a
               href="#"
               className="flex items-center text-gray-300 hover:text-white transition-colors duration-200"
             >
-              <span className="material-icons mr-2">settings</span>
+              <span className="material-icons mr-2">
+                <Image
+                  src={settingsIcon}
+                  alt="Courses Icon"
+                  className="h-8 w-8"
+                />
+              </span>
               System Settings
             </a>
           </li>
@@ -76,8 +89,8 @@ const Sidebar = () => {
       </nav>
       <div className="absolute bottom-0 p-4">
         <button className="flex items-center text-gray-300 hover:text-white transition-colors duration-200">
-          <span className="material-icons mr-2">logout</span>
-          Logout
+          <Image src={logoutIcon} alt="Courses Icon" className="h-8 w-8" />{" "}
+          <span className="mx-2">Sign Out</span>
         </button>
       </div>
     </aside>

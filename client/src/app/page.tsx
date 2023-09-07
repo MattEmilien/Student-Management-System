@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Metadata } from "next";
 import Sidebar from "./components/Header/Sidebar";
-import Head from "next/head";
+import Button from "@mui/material/Button";
 
 export const metadata: Metadata = {
   title: "Students | Home",
@@ -20,6 +20,8 @@ export default function Home() {
           This is a student management system. It allows you to add, edit, and
           delete students.
         </p>
+        <br />
+        <Button variant="contained" >Click here to get started!</Button>
       </section>
     </main>
   );
