@@ -1,7 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Metadata } from "next";
 import Sidebar from "./components/Header/Sidebar";
-import Button from "@mui/material/Button";
+import HomeIcon from "@mui/icons-material/HomeOutlined";
+import { Button } from "../components/ui/button";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 export const metadata: Metadata = {
   title: "Students | Home",
@@ -21,7 +24,20 @@ export default function Home() {
           delete students.
         </p>
         <br />
-        <Button variant="contained" >Click here to get started!</Button>
+        <Button>Click here to get started!</Button>
+        <Link
+          href="/"
+          className="font-medium text-slate-600 absolute top-8 right-14 hover:text-white"
+        >
+          <HomeIcon /> Home
+        </Link>
+        <Alert>
+          <Terminal className="h-4 w-4" />
+          <AlertTitle>Heads up!</AlertTitle>
+          <AlertDescription>
+            You can add components and dependencies to your app using the cli.
+          </AlertDescription>
+        </Alert>
       </section>
     </main>
   );
