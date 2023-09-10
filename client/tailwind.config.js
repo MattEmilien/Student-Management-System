@@ -23,7 +23,7 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "#00000",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
@@ -73,6 +73,7 @@ module.exports = {
       fontFamily: {
         lato: ["Lato", "sans"],
         "roboto-slab": ["Roboto Slab", "serif"],
+        poppins: ["Poppins", "sans"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

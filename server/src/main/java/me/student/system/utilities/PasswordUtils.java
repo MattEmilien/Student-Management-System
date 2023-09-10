@@ -6,7 +6,6 @@ import java.security.SecureRandom;
 
 public class PasswordUtils {
 
-    // Method to generate a random salt
     public static String generateSalt() {
         SecureRandom secureRandom = new SecureRandom();
         byte[] saltBytes = new byte[16]; // 16 bytes is a common size for salts

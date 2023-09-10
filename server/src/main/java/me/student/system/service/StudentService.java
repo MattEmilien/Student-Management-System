@@ -1,5 +1,6 @@
 package me.student.system.service;
 
+import lombok.RequiredArgsConstructor;
 import me.student.system.model.Student;
 import me.student.system.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,33 +12,34 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor(onConstructor_ = @Autowired )
 public class StudentService {
 
-    @Autowired
     private StudentRepository studentRepository;
 
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Student saveStudent(Student student) {
+    public Student save(Student student) {
         return studentRepository.save(student);
     }
 
     @ResponseStatus(HttpStatus.OK)
-    public void removeStudent(Student student) {
+    public void remove(Student student) {
         studentRepository.deleteById(student.getId());
     }
 
-    public List<double[]> getStudentGrades(Student student) {
+    public List<double[]> getGrades(Student student) {
         return studentRepository.findById(student.getId())
                 .stream().map(student1 -> student.getGrades()).collect(Collectors.toList());
     }
 
 
-    public List<Student> getAllStudents() {
+    public List<Student> findAll() {
         return studentRepository.findAll();
     }
 
-    public Student getStudentByName(String name) {
+    public Student findByName(String name) {
         return null;
+        // TODO: Add logic
     }
 
 }

@@ -1,10 +1,13 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
-import { Metadata } from "next";
-import Sidebar from "./components/Header/Sidebar";
+import Sidebar from "../components/Sidebar";
 import HomeIcon from "@mui/icons-material/HomeOutlined";
+import React from "react";
+import { Metadata } from "next";
 import { Button } from "../components/ui/button";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { ModeToggle } from "@/components/Theme";
+import { AdmissionsCalendar } from "@/components/ui/admissions-calendar";
 
 export const metadata: Metadata = {
   title: "Students | Home",
@@ -12,32 +15,28 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const [date, setDate] = React.useState<Date | undefined>(new Date());
+
   return (
     <main className="">
       <Sidebar />
       <section className="ml-auto mr-auto text-gray-800 flex flex-col justify-center items-center h-screen overflow-hidden relative">
-        <h1 className="text-3xl font-bold text-center">
-          Welcome to the student management system!
-        </h1>
-        <p className="text-center">
-          This is a student management system. It allows you to add, edit, and
-          delete students.
-        </p>
-        <br />
-        <Button>Click here to get started!</Button>
         <Link
           href="/"
-          className="font-medium text-slate-600 absolute top-8 right-14 hover:text-white"
+          className="font-medium text-slate-600 absolute top-8 right-14 hover:text-slate-800"
         >
           <HomeIcon /> Home
         </Link>
-        <Alert>
-          <Terminal className="h-4 w-4" />
-          <AlertTitle>Heads up!</AlertTitle>
-          <AlertDescription>
-            You can add components and dependencies to your app using the cli.
-          </AlertDescription>
-        </Alert>
+        <span className="absolute bottom-10 right-9">
+          <ModeToggle />
+        </span>
+        <span className="absolute border border-gray-300 rounded-lg p-5">
+          <AdmissionsCalendar
+            mode="single"
+            selected={date}
+            onSelect={setDate}
+          />
+        </span>
       </section>
     </main>
   );
