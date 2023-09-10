@@ -74,10 +74,10 @@ To get started with the Student Management System, follow these steps:
 - :gear: Spring Boot
 - :lock: Spring Security
 - :floppy_disk: Hibernate
-- :rocket: Thymeleaf (or your preferred templating engine)
+- :rocket: Thymeleaf
 - :art: HTML/CSS
 - :zap: JavaScript
-- :fast_forward: Next.js (for the upcoming frontend update)
+- :fast_forward: Next.js
 
 ---
 
