@@ -1,9 +1,14 @@
 package me.student.system.service;
 
 import lombok.RequiredArgsConstructor;
+import me.student.system.dto.StudentDTO;
+import me.student.system.exception.DuplicateEntryException;
+import me.student.system.exception.NoSuchUserException;
 import me.student.system.model.Student;
 import me.student.system.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -20,11 +25,19 @@ public class StudentService {
 
     private StudentRepository studentRepository;
 
-    public void save(@Valid Student student) {
-         studentRepository.save(student);
+    public void add(@Valid Student student) {
+        if (studentRepository.existsByEmail(student.getEmail())) {
+            throw new DuplicateEntryException("Email " + student.getEmail() + " is already taken");
+        }
+
+        studentRepository.save(student);
     }
 
     public void remove(@Valid Integer id) {
+        if (!studentRepository.existsById(id)) {
+            throw new NoSuchUserException("Student with ID " + id + " not found");
+        }
+
         studentRepository.deleteById(id);
     }
 
@@ -35,8 +48,10 @@ public class StudentService {
     }
 
 
-    public List<Student> findAll() {
-        return studentRepository.findAll();
+    public Page<StudentDTO> findAll(Pageable pageable) {
+        Page<Student> students = studentRepository.findAll(pageable);
+
+        return students.map(StudentDTO::new);
     }
 
     public Student findByName(String name) {

@@ -11,6 +11,6 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	// TODO: Add Pagination, Data Transfer Objects, 2FA, Email Service for registration & Protected Routes
+	// TODO: 2FA, Email Service for registration & Protected Routes
 
 }

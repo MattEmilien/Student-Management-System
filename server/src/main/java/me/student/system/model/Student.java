@@ -20,10 +20,12 @@ public class Student {
 
     @NotNull
     @Size(min = 2, max = 50)
+    @Column(nullable = false)
     private String firstName;
 
     @NotNull
     @Size(min = 2, max = 50)
+    @Column(nullable = false)
     private String lastName;
 
     @NotNull
@@ -33,12 +35,14 @@ public class Student {
 
     @NotNull
     @Size(min = 6, max = 50)
+    @Column(nullable = false)
     private String password;
 
     @Pattern(regexp = "\\d{10}")
     private String phone;
 
     @Pattern(regexp = "(Male|Female)")
+    @Column(nullable = false)
     private String gender;
 
     @Past

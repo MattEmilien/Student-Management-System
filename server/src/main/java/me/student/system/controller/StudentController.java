@@ -1,9 +1,13 @@
 package me.student.system.controller;
 
+import me.student.system.dto.StudentDTO;
 import me.student.system.exception.NoSuchUserException;
 import me.student.system.model.Student;
 import me.student.system.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -24,7 +28,7 @@ public class StudentController {
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public void add(@Valid @RequestBody Student student) {
-        service.save(student);
+        service.add(student);
     }
 
     @GetMapping("/grades")
@@ -39,10 +43,23 @@ public class StudentController {
         service.remove(id);
     }
 
+
+    /*
+    Example Request string -> GET /students/?page=1&size=10&sort=lastName,firstName
+      *  /students/ is the base URL for the findAll() endpoint.
+      *  page=1 specifies that you want to retrieve the first page of results.
+      *  size=10 specifies that you want to retrieve 10 students per page.
+      *  sort=lastName,firstName indicates that you want to sort the results by last name and
+ */
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public List<Student> getAllStudents() {
-       return service.findAll();
+    public Page<StudentDTO> findAll(
+      @RequestParam(name = "page", defaultValue = "0") int page,
+      @RequestParam(name = "size", defaultValue = "10") int size,
+      @RequestParam(name = "sort", defaultValue = "id") String sort) {
+
+        PageRequest pageable = PageRequest.of(page, size, Sort.by(sort));
+        return service.findAll(pageable);
     }
 
 
