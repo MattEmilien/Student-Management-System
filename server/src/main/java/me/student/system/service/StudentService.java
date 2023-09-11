@@ -54,9 +54,14 @@ public class StudentService {
         return students.map(StudentDTO::new);
     }
 
-    public Student findByName(String name) {
-        return studentRepository.findByName(name).
-          orElseThrow(() -> new NoSuchElementException("Student by the name of " + name + " was not found!"));
+    public Student findByFirstName(String name) {
+        return studentRepository.findByFirstName(name).
+          orElseThrow(() -> new NoSuchElementException("Student by the first name of " + name + " was not found!"));
+    }
+
+    public Student findByLastName(String name) {
+        return studentRepository.findByLastName(name).
+          orElseThrow(() -> new NoSuchElementException("Student by the last name of " + name + " was not found!"));
     }
 
     public Student findByID(Integer id) {

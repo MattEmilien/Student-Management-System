@@ -1,8 +1,6 @@
 package me.student.system.repository;
 
 import me.student.system.model.Student;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +12,10 @@ public interface StudentRepository extends PagingAndSortingRepository<Student, I
   @Override
   Optional<Student> findById(Integer integer);
 
-  Optional<Student> findByName(String name);
+  Optional<Student> findByFirstName(String firstName);
+
+  Optional<Student> findByLastName(String lastName);
+
 
   boolean existsByEmail(String email);
 }
