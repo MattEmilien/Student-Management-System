@@ -6,13 +6,16 @@ import me.student.system.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/student")
 @CrossOrigin
+@Validated
 public class StudentController {
 
     @Autowired
@@ -20,32 +23,33 @@ public class StudentController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@RequestBody Student student) {
+    public void add(@Valid @RequestBody Student student) {
         service.save(student);
     }
 
     @GetMapping("/grades")
-    public double[] getStudentGrades(@RequestParam(value = "name") Student student) {
-       return service.findByID(student.getId()).getGrades();
+    @ResponseStatus(HttpStatus.OK)
+    public double[] getStudentGrades(@RequestParam(value = "id") Integer id) {
+       return service.getGrades(id);
     }
 
     @DeleteMapping("/")
-    public void remove(@RequestParam(value = "name") Student student) {
-        service.delete(student);
+    @ResponseStatus(HttpStatus.OK)
+    public void remove(@RequestParam(value = "id") Integer id) {
+        service.remove(id);
     }
-
-
 
     @GetMapping("/")
+    @ResponseStatus(HttpStatus.OK)
     public List<Student> getAllStudents() {
-        return new ResponseEntity<>()
+       return service.findAll();
     }
 
 
-    @GetMapping("/get")
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Student getStudent(@RequestParam("ID") int id) {
-        return service.findById(id)
-                .orElseThrow(() -> new NoSuchUserException("Student with ID " + id + " not found"));
+        return service.findByID(id);
     }
 
 
