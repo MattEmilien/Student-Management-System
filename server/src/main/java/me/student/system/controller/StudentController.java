@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/students")
 @CrossOrigin
 @Validated
 public class StudentController {
@@ -25,9 +25,9 @@ public class StudentController {
     @Autowired
     private StudentService service;
 
-    @PostMapping("/")
+    @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@Valid @RequestBody Student student) {
+    public void add(@RequestBody Student student) {
         service.add(student);
     }
 
@@ -49,7 +49,7 @@ public class StudentController {
       *  /students/ is the base URL for the findAll() endpoint.
       *  page=1 specifies that you want to retrieve the first page of results.
       *  size=10 specifies that you want to retrieve 10 students per page.
-      *  sort=lastName,firstName indicates that you want to sort the results by last name and
+      *  sort=lastName,firstName indicates that you want to sort the results by first or last name
  */
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
@@ -61,7 +61,6 @@ public class StudentController {
         PageRequest pageable = PageRequest.of(page, size, Sort.by(sort));
         return service.findAll(pageable);
     }
-
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)

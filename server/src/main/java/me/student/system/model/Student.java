@@ -79,8 +79,5 @@ public class Student {
 
     @ValidGrade
     private double[] grades;
-    public Student(String plainTextPassword) throws NoSuchAlgorithmException {
-        password = PasswordUtils.hashPassword(plainTextPassword, PasswordUtils.generateSalt());
-    }
 
 }

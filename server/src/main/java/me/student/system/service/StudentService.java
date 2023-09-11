@@ -20,9 +20,8 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor(onConstructor_ = @Autowired )
 public class StudentService {
-
+    @Autowired
     private StudentRepository studentRepository;
 
     public void add(@Valid Student student) {
