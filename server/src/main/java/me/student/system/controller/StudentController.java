@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,18 +28,21 @@ public class StudentController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority('student:write')")
     public void add(@RequestBody Student student) {
         service.add(student);
     }
 
     @GetMapping("/grades")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAuthority('student:write')")
     public double[] getStudentGrades(@RequestParam(value = "id") Integer id) {
        return service.getGrades(id);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("/remove")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAuthority('student:write')")
     public void remove(@RequestParam(value = "id") Integer id) {
         service.remove(id);
     }
@@ -51,8 +55,10 @@ public class StudentController {
       *  size=10 specifies that you want to retrieve 10 students per page.
       *  sort=lastName,firstName indicates that you want to sort the results by first or last name
  */
-    @GetMapping("/")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAuthority('student:read')")
+
     public Page<StudentDTO> findAll(
       @RequestParam(name = "page", defaultValue = "0") int page,
       @RequestParam(name = "size", defaultValue = "10") int size,
@@ -62,9 +68,10 @@ public class StudentController {
         return service.findAll(pageable);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id")
     @ResponseStatus(HttpStatus.OK)
-    public Student getStudent(@RequestParam("ID") int id) {
+    @PreAuthorize("hasAuthority('student:read')")
+    public Student getStudent(@RequestParam("id") int id) {
         return service.findByID(id);
     }
 
