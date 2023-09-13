@@ -1,6 +1,4 @@
-package me.student.system.validator.model;
-
-import me.student.system.validator.GradeValidator;
+package me.student.system.validator.grade;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

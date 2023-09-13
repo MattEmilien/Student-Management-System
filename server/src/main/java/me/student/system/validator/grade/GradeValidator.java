@@ -1,8 +1,8 @@
-package me.student.system.validator;
+package me.student.system.validator.grade;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import me.student.system.validator.model.ValidGrade;
+import me.student.system.validator.grade.ValidGrade;
 
 public class GradeValidator implements ConstraintValidator<ValidGrade, double[]> {
 

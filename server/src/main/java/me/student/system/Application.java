@@ -11,6 +11,5 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	// TODO: 2FA, Email Service for registration & Protected Routes
 
 }

@@ -1,18 +1,18 @@
-package me.student.system.dto;
+package me.student.system.course;
 
 import lombok.Data;
-import me.student.system.model.Course;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 public class CourseDTO {
 
+    private int id;
     private String subject;
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
+    private boolean active;
 
     public CourseDTO(Course course) {
         this.subject = subject;

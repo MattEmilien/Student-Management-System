@@ -15,6 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
+import java.util.concurrent.TimeUnit;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -30,17 +32,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-//          .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-//          .and()
-          .csrf().disable()
+         // .csrf().disable()
           .authorizeRequests()
           .antMatchers("/", "index", "/css/*", "/public/**").permitAll()
-//        .antMatchers("/students/**").hasAnyRole("STUDENT", "ADMIN")
           .anyRequest().authenticated()
           .and()
-          .formLogin().permitAll()
+          .formLogin()
+          .defaultSuccessUrl("/courses", true)
           .and()
-          .httpBasic();
+          .rememberMe()
+          .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(14))
+          .key("CE745E19C0D523E2873065C4CFC1CF6B3D40C546BF2D17F20A1CC7D52A8F14AE")
+          .and()
+          .logout()
+          .clearAuthentication(true)
+          .invalidateHttpSession(true)
+          .deleteCookies("JSESSIONID", "remember-me")
+          .logoutSuccessUrl("/login");
+
     }
 
 
@@ -50,20 +59,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         UserDetails user = User.builder()
           .username("student")
           .password(passwordEncoder.encode("student"))
-          .authorities(UserRole.STUDENT.getGrantedAutorities())
+          .authorities(UserRole.STUDENT.getGrantedAuthorities())
           .build();
 
         UserDetails teacher = User.builder()
           .username("teacher")
           .password(passwordEncoder.encode("teacher"))
-          .authorities(UserRole.TEACHER.getGrantedAutorities())
+          .authorities(UserRole.TEACHER.getGrantedAuthorities())
 
           .build();
 
         UserDetails developer = User.builder()
           .username("developer")
           .password(passwordEncoder.encode("developer"))
-          .authorities(UserRole.ADMIN.getGrantedAutorities())
+          .authorities(UserRole.ADMIN.getGrantedAuthorities())
           .build();
         return new InMemoryUserDetailsManager(user, teacher, developer);
     }
