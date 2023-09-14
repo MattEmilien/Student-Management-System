@@ -1,6 +1,5 @@
 package me.student.system.security.role;
 
-import lombok.Data;
 import lombok.Getter;
 
 

@@ -43,6 +43,7 @@ public class CourseController {
     return service.findAll(pageable);
   }
 
+
   @GetMapping("/id")
   @ResponseStatus(HttpStatus.OK)
   @PreAuthorize("hasAuthority('course:read')")

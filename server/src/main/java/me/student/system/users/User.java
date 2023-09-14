@@ -60,7 +60,7 @@ public class User {
     @JoinTable(
       name = "user_course",
       joinColumns = @JoinColumn(name = "user_id"),
-      inverseJoinColumns = @JoinColumn(name = "user_id")
+      inverseJoinColumns = @JoinColumn(name = "course_id")
     )
     private List<Course> courses;
 
